@@ -1,14 +1,13 @@
 package com.example.cobaa;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -21,8 +20,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.cobaa.models.QuestionMap;
 
 import java.io.IOException;
@@ -32,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class QuestionActivity extends AppCompatActivity {
+public class TestActivity extends AppCompatActivity {
     @BindView(R.id.tvScore)
     TextView tvScore;
     @BindView(R.id.btnStart)
@@ -52,12 +49,10 @@ public class QuestionActivity extends AppCompatActivity {
     @BindView(R.id.btnAnswerD)
     Button btnAnswerD;
 
-//    private Question mQuestions = new Question(Question.JAWA);
-//    private int mqQuestionsLength = mQuestions.mQuestions.length;
-    private int mScore = 0;
-    private int mqQuestionsLength;
-    private QuestionMap mQuestions;
+    private QuestionMap mQuestions = new QuestionMap(QuestionMap.JAWA);
     private String mAnswer;
+    private int mScore = 0;
+    private int mqQuestionsLength = mQuestions.mQuestions.length;
     private MediaPlayer mediaplayer;
     private Handler handler = new Handler();
     Random r;
@@ -69,40 +64,13 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question);
         ButterKnife.bind(this);
         setup();
-        initView();
-    }
-
-    void setup() {
-        Intent intent = getIntent();
-        if (intent != null) {
-            String daerah = intent.getStringExtra("Daerah");
-            mQuestions = new QuestionMap(daerah);
-            mqQuestionsLength = mQuestions.mQuestions.length;
-        }
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
-        btnStart.setVisibility(View.VISIBLE);
-        btnStop.setVisibility(View.GONE);
-        mediaplayer = new MediaPlayer();
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            mediaplayer.setAudioAttributes(new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build());
-        } else {
-            mediaplayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        }
-        playerSeekBar.setMax(100);
-        r = new Random();
-        tvScore.setText(mScore + " / " + mqQuestionsLength);
-        updateQuestion(r.nextInt(mqQuestionsLength), true);
-    }
-
-    void initView() {
         btnAnswerA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (btnAnswerA.getText() == mAnswer) {
                     mScore++;
-                    tvScore.setText(mScore + " / " + mqQuestionsLength);
-                    updateQuestion(r.nextInt(mqQuestionsLength), false);
+                    tvScore.setText(mScore + " / 20");
+                    updateQuestion(r.nextInt(mqQuestionsLength));
                 } else {
                     gameOver();
                 }
@@ -114,8 +82,8 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (btnAnswerB.getText() == mAnswer) {
                     mScore++;
-                    tvScore.setText(mScore + " / " + mqQuestionsLength);
-                    updateQuestion(r.nextInt(mqQuestionsLength), false);
+                    tvScore.setText(mScore + " / 20");
+                    updateQuestion(r.nextInt(mqQuestionsLength));
                 } else {
                     gameOver();
                 }
@@ -127,8 +95,8 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (btnAnswerC.getText() == mAnswer) {
                     mScore++;
-                    tvScore.setText(mScore + " / " + mqQuestionsLength);
-                    updateQuestion(r.nextInt(mqQuestionsLength), false);
+                    tvScore.setText(mScore + " / 20");
+                    updateQuestion(r.nextInt(mqQuestionsLength));
                 } else {
                     gameOver();
                 }
@@ -140,8 +108,8 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (btnAnswerD.getText() == mAnswer) {
                     mScore++;
-                    tvScore.setText(mScore + " / " + mqQuestionsLength);
-                    updateQuestion(r.nextInt(mqQuestionsLength), false);
+                    tvScore.setText(mScore + " / 20");
+                    updateQuestion(r.nextInt(mqQuestionsLength));
                 } else {
                     gameOver();
                 }
@@ -149,35 +117,42 @@ public class QuestionActivity extends AppCompatActivity {
         });
     }
 
+    void setup(){
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
+        btnStart.setVisibility(View.VISIBLE);
+        btnStop.setVisibility(View.GONE);
+        mediaplayer = new MediaPlayer();
+        playerSeekBar.setMax(100);
+        r = new Random();
+        tvScore.setText(mScore + " / 20");
+        updateQuestion(r.nextInt(mqQuestionsLength));
+    }
+
     @OnClick({R.id.btnStart, R.id.btnStop})
-    void onClick(View v) {
-        if (v == btnStart) {
+    void onClick(View v){
+        if(v == btnStart){
             playAudio(filename);
-        } else if (v == btnStop) {
+        }else if(v == btnStop){
             stopAudio();
         }
     }
 
     private void playAudio(String filename) {
-        Log.e("Filename", filename);
+        Log.e("Song", filename);
         mediaplayer = new MediaPlayer();
-//        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            mediaplayer.setAudioAttributes(new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build());
-//        } else {
-//            mediaplayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//        }
-        mediaplayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
-            mediaplayer.setDataSource(QuestionActivity.this, Uri.parse("android.resource://com.example.cobaa/raw/" + filename));
-            mediaplayer.prepareAsync();
-            mediaplayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    btnStart.setVisibility(View.GONE);
-                    btnStop.setVisibility(View.VISIBLE);
-                    mediaplayer.start();
-                }
-            });
+            mediaplayer.setDataSource(TestActivity.this, Uri.parse("android.resource://com.example.cobaa/raw/" + filename));
+            btnStart.setVisibility(View.GONE);
+            btnStop.setVisibility(View.VISIBLE);
+            try {
+                mediaplayer.prepare();
+            } catch (IllegalStateException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex1) {
+                ex1.printStackTrace();
+            }
+            mediaplayer.start();
             mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
@@ -187,46 +162,15 @@ public class QuestionActivity extends AppCompatActivity {
             });
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(QuestionActivity.this, "Maaf tidak dapat memutar lagu", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TestActivity.this, "Maaf tidak dapat memutar lagu", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    void test() {
-//        final VideoView video = (VideoView) findViewById(R.id.videoplayer);
-//        final MediaController controller = new MediaController(this);
-//
-//        video.setVideoURI(Uri.parse(getIntent().getStringExtra("url")));
-//        video.setMediaController(controller);
-//        controller.setMediaPlayer(video);
-//        video.setOnPreparedListener(new OnPreparedListener() {
-//
-//            public void onPrepared(MediaPlayer mp) {
-//                int duration = video.getDuration();
-//                video.requestFocus();
-//                video.start();
-//                controller.show();
-//
-//            }
-//        });
     }
 
     private void stopAudio() {
-//        mediaplayer.stop();
-        if (mediaplayer.isPlaying()) {
-            mediaplayer.stop();
-        }
+        mediaplayer.stop();
         try {
-//            mediaplayer.prepare();
-//            mediaplayer.seekTo(0);
-            if (mediaplayer.isPlaying()) {
-                mediaplayer.prepareAsync();
-                mediaplayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-                        mediaplayer.seekTo(0);
-                    }
-                });
-            }
+            mediaplayer.prepare();
+            mediaplayer.seekTo(0);
         } catch (Throwable t) {
             t.printStackTrace();
         }
@@ -234,21 +178,20 @@ public class QuestionActivity extends AppCompatActivity {
         btnStop.setVisibility(View.GONE);
     }
 
-//    private Runnable updater = new Runnable() {
-//        @Override
-//        public void run() {
-//            updateSeekBar();
-//            long currentDuration = mediaplayer.getCurrentPosition();
-//            tvCurrentTime.setText(milliSecondsToTimer(currentDuration));
-//        }
-//    };
+    private Runnable updater = new Runnable() {
+        @Override
+        public void run() {
+            updateSeekBar();
+            long currentDuration = mediaplayer.getCurrentPosition();
+        }
+    };
 
-//    private void updateSeekBar() {
-//        if (mediaplayer.isPlaying()) {
-//            playerSeekBar.setProgress((int) (((float) mediaplayer.getCurrentPosition() / mediaplayer.getDuration()) * 100));
-//            handler.postDelayed(updater, 1000);
-//        }
-//    }
+    private void updateSeekBar() {
+        if (mediaplayer.isPlaying()) {
+            playerSeekBar.setProgress((int) (((float) mediaplayer.getCurrentPosition() / mediaplayer.getDuration()) * 100));
+            handler.postDelayed(updater, 1000);
+        }
+    }
 
     private String milliSecondsToTimer(long milliSeconds) {
         String timerString = "";
@@ -270,7 +213,7 @@ public class QuestionActivity extends AppCompatActivity {
         return timerString;
     }
 
-    private void updateQuestion(int num, Boolean isFirst) {
+    private void updateQuestion(int num) {
         tvQuestion.setText(mQuestions.getQuestion(num));
         btnAnswerA.setText(mQuestions.getchoice1(num));
         btnAnswerB.setText(mQuestions.getchoice2(num));
@@ -278,16 +221,13 @@ public class QuestionActivity extends AppCompatActivity {
         btnAnswerD.setText(mQuestions.getchoice4(num));
         mAnswer = mQuestions.getCorrectAnswer(num);
         filename = mQuestions.getFileName(num);
-//        if(!isFirst){
         stopAudio();
-//        }
-//        initAudio();
     }
 
 
-    public void gameOver() {
+    public void gameOver(){
         stopAudio();
-        final Dialog dialog = new Dialog(QuestionActivity.this);
+        final Dialog dialog = new Dialog(TestActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.dialog_info);
@@ -311,7 +251,7 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(QuestionActivity.this, MapActivity.class);
+                Intent intent = new Intent(TestActivity.this, MapActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

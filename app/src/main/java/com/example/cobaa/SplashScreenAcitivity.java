@@ -16,15 +16,12 @@ public class SplashScreenAcitivity extends AppCompatActivity {
         setContentView(R.layout.activity_splashscreen);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-
-
-
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         final Handler handler=new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                startActivity(new Intent(getApplicationContext(), IntroActivity.class));
                 finish();
             }
         }, 3000L);
