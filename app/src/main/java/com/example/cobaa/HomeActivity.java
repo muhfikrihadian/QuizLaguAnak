@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cobaa.models.QuestionMap;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -44,23 +45,23 @@ public class HomeActivity extends AppCompatActivity {
     @OnClick({R.id.btnSumatera, R.id.btnJawa, R.id.btnKalimantan, R.id.btnSulawesi, R.id.btnMalukuIrian})
     void onClick(View v) {
         if (v == btnSumatera) {
-            daerah = Question.SUMATERA;
+            daerah = QuestionMap.SUMATERA;
             startgame();
         }
         if (v == btnJawa) {
-            daerah = Question.JAWA;
+            daerah = QuestionMap.JAWA;
             startgame();
         }
         if (v == btnKalimantan) {
-            daerah = Question.KALIMANTAN;
+            daerah = QuestionMap.KALIMANTAN;
             startgame();
         }
         if (v == btnSulawesi) {
-            daerah = Question.SULAWESI;
+            daerah = QuestionMap.SULAWESI;
             startgame();
         }
         if (v == btnMalukuIrian) {
-            daerah = Question.MALUKU_IRIANJAYA;
+            daerah = QuestionMap.MALUKU_IRIANJAYA;
             startgame();
         }
     }

@@ -49,10 +49,12 @@ public class TestActivity extends AppCompatActivity {
     @BindView(R.id.btnAnswerD)
     Button btnAnswerD;
 
-    private QuestionMap mQuestions = new QuestionMap(QuestionMap.JAWA);
+    //    private QuestionMap mQuestions = new QuestionMap(QuestionMap.JAWA);
+//    private int mqQuestionsLength = mQuestions.mQuestions.length;
+    private int mqQuestionsLength;
+    private QuestionMap mQuestions;
     private String mAnswer;
     private int mScore = 0;
-    private int mqQuestionsLength = mQuestions.mQuestions.length;
     private MediaPlayer mediaplayer;
     private Handler handler = new Handler();
     Random r;
@@ -117,7 +119,13 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
-    void setup(){
+    void setup() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            String daerah = intent.getStringExtra("Daerah");
+            mQuestions = new QuestionMap(daerah);
+            mqQuestionsLength = mQuestions.mQuestions.length;
+        }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         btnStart.setVisibility(View.VISIBLE);
@@ -130,10 +138,10 @@ public class TestActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.btnStart, R.id.btnStop})
-    void onClick(View v){
-        if(v == btnStart){
+    void onClick(View v) {
+        if (v == btnStart) {
             playAudio(filename);
-        }else if(v == btnStop){
+        } else if (v == btnStop) {
             stopAudio();
         }
     }
@@ -225,7 +233,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
 
-    public void gameOver(){
+    public void gameOver() {
         stopAudio();
         final Dialog dialog = new Dialog(TestActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -251,7 +259,7 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(TestActivity.this, MapActivity.class);
+                Intent intent = new Intent(TestActivity.this, StartGameActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

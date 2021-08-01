@@ -6,155 +6,39 @@ public class QuestionMap {
     public static final String KALIMANTAN = "KALIMANTAN";
     public static final String SULAWESI = "SULAWESI";
     public static final String MALUKU_IRIANJAYA = "MALUKU_IRIANJAYA";
-//    public String mQuestions[];
-//    public String mChoices[][];
-//    public String mCorrectAnswer [];
-//    public String mFile[];
+    public String mQuestions[];
+    public String mChoices[][];
+    public String mCorrectAnswer [];
+    public String mFile[];
 
     public QuestionMap(String daerah) {
-//        if (daerah.equalsIgnoreCase(SUMATERA)) {
-//            mQuestions = mQuestionSumatera;
-//            mChoices = mChoicesSumatera;
-//            mCorrectAnswer = mAnswerSumatera;
-//            mFile = mFileSumatera;
-//        } else if (daerah.equalsIgnoreCase(JAWA)) {
-//            mQuestions = mQuestionJawa;
-//            mChoices = mChoicesJawa;
-//            mCorrectAnswer = mAnswerJawa;
-//            mFile = mFileJawa;
-//        } else if (daerah.equalsIgnoreCase(KALIMANTAN)) {
-//            mQuestions = mQuestionKalimantan;
-//            mChoices = mChoicesKalimantan;
-//            mCorrectAnswer = mAnswerKalimantan;
-//            mFile = mFileKalimantan;
-//        } else if (daerah.equalsIgnoreCase(SULAWESI)) {
-//            mQuestions = mQuestionSulawesi;
-//            mChoices = mChoicesSulawesi;
-//            mCorrectAnswer = mAnswerSulawesi;
-//            mFile = mFileSulawesi;
-//        } else if (daerah.equalsIgnoreCase(MALUKU_IRIANJAYA)) {
-//            mQuestions = mQuestionMalukuIrianjaya;
-//            mChoices = mChoicesMalukuIrianjaya;
-//            mCorrectAnswer = mAnswerMalukuIrianjaya;
-//            mFile = mFileMalukuIrianjaya;
-//        }
+        if (daerah.equalsIgnoreCase(SUMATERA)) {
+            mQuestions = mQuestionSumatera;
+            mChoices = mChoicesSumatera;
+            mCorrectAnswer = mAnswerSumatera;
+            mFile = mFileSumatera;
+        } else if (daerah.equalsIgnoreCase(JAWA)) {
+            mQuestions = mQuestionJawa;
+            mChoices = mChoicesJawa;
+            mCorrectAnswer = mAnswerJawa;
+            mFile = mFileJawa;
+        } else if (daerah.equalsIgnoreCase(KALIMANTAN)) {
+            mQuestions = mQuestionKalimantan;
+            mChoices = mChoicesKalimantan;
+            mCorrectAnswer = mAnswerKalimantan;
+            mFile = mFileKalimantan;
+        } else if (daerah.equalsIgnoreCase(SULAWESI)) {
+            mQuestions = mQuestionSulawesi;
+            mChoices = mChoicesSulawesi;
+            mCorrectAnswer = mAnswerSulawesi;
+            mFile = mFileSulawesi;
+        } else if (daerah.equalsIgnoreCase(MALUKU_IRIANJAYA)) {
+            mQuestions = mQuestionMalukuIrianjaya;
+            mChoices = mChoicesMalukuIrianjaya;
+            mCorrectAnswer = mAnswerMalukuIrianjaya;
+            mFile = mFileMalukuIrianjaya;
+        }
     }
-
-    public String mQuestions[] = {
-            "Lagu Ampar-Ampar Pisang ini berasal dari ?",
-            "Lagu Ismail Marzuki tersebut berjudul ?",
-            "Lagu Kambanglah Bungo berasal dari ?",
-            "Lagu Bungong Jeumpa berasal dari ?",
-            "Lagu Soleram berasal dari ?",
-            "Lagu Ambon Manise berasal dari ?",
-            "Lagu Anju ahu berasal dari ?",
-            "Lagu Ayam den lapeh berasal dari ?",
-            "Lagu Anak kambing saya berasal dari ?",
-            "Lagu Cublak-cublak suweng berasal dari ?",
-            "Lagu Injit-injit semut berasal dari ?",
-            "Lagu Naik-naik ke puncak gunung berasal dari ?",
-            "Lagu Gundul pacul berasal dari ?",
-            "Lagu Si Patokaan berasal dari ?",
-            "Lagu Tokecang berasal dari ?",
-            "Lagu Yamko Rame Yamko berasal dari ?",
-            "Lagu Jali-jali berasal dari ?",
-            "Lagu Manuk Dadali berasal dari ?",
-            "Lagu Angin Mamiri berasal dari ?",
-            "Lagu Cing Cangkeling berasal ?",
-    };
-
-    private String mChoices[][] = {
-            {"Kalimantan Selatan", "Jakarta", "Sumatera Barat", "Aceh", "Kepulauan Riau"},
-            {"Soleram", "Halo Bandoeng", "Kembanglah Bungo", "Apuse", "Naik-Naik ke Puncak Gunung"},
-            {"Jawa Timur", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau"},
-            {"Jakarta", "Kalimantan Selatan", "Medan", "Aceh", "Papua"},
-            {"Papua", "Jawa barat", "Riau", "Balikpapan", "Bandung"},
-            {"Papua", "Maluku", "Riau", "Balikpapan", "Bandung"},
-            {"Jawa Timur", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau"},
-            {"Jawa tengah", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau"},
-            {"Jakarta", "Kalimantan Selatan", "Medan", "NTT", "Papua"},
-            {"Papua", "Jawa Timur", "Riau", "Jawa Barat", "Jawa Tengah"},
-            {"Jambi", "Maluku", "Riau", "Kalimantan selatan", "Bandung"},
-            {"Jambi", "Maluku", "Riau", "Pontianak", "Bandung"},
-            {"Pontianak", "Jawa Tengah", "Riau", "Balikpapan", "Yogyakarta"},
-            {"Jawa Tengah", "Maluku", "Sulawesi Utara", "Balikpapan", "Batam"},
-            {"Sulawesi Utara", "Balikpapan", "Jawa Barat", "Medan", "Bandung"},
-            {"Papua", "Maluku", "Riau", "Batam", "Jakarta"},
-            {"Bali", "Pontianak", "Padang", "Jakarta", "Papua"},
-            {"Tanjung Pinang", "Pontianak", "Jakarta", "Jawa Barat", "Makassar"},
-            {"Batam", "Tanjung Pinang", "Padang", "Makassar", "Jakarta"},
-            {"Bali", "Jawa Barat", "Padang", "Medan", "Makassar"},
-    };
-
-    private String mCorrectAnswer[] = {
-            "Kalimantan Selatan",
-            "Halo Bandoeng",
-            "Sumatera Barat",
-            "Aceh",
-            "Riau",
-            "Maluku",
-            "Sumatera Utara",
-            "Sumatera Barat",
-            "NTT",
-            "Jawa Timur",
-            "Jambi",
-            "Maluku",
-            "Jawa Tengah",
-            "Sulawesi Utara",
-            "Jawa Barat",
-            "Papua",
-            "Jakarta",
-            "Jawa Barat",
-            "Makassar",
-            "Jawa Barat"
-    };
-
-//    private String mFile[] = {
-//            "amparpisang",
-//            "halobandung",
-//            "kambanglahbungo",
-//            "bungongjeumpa",
-//            "soleram",
-//            "ambonmanise",
-//            "anjuahu",
-//            "ayamdenlapeh",
-//            "anakkambing",
-//            "cublaksuweng",
-//            "injitsemut",
-//            "naikgunung",
-//            "gundulpacul",
-//            "sipatokaan",
-//            "tokecang",
-//            "yamkorame",
-//            "jalijali",
-//            "manukdadali",
-//            "anginmamiri",
-//            "cingcangkeling"
-//    };
-
-    private String mFile[] = {
-            "newanjuahu",
-            "newbermainlayang",
-            "newcingcangkeling",
-            "newcublaksuweng",
-            "newanjuahu",
-            "newbermainlayang",
-            "newcingcangkeling",
-            "newcublaksuweng",
-            "newanjuahu",
-            "newbermainlayang",
-            "newcingcangkeling",
-            "newcublaksuweng",
-            "newanjuahu",
-            "newbermainlayang",
-            "newcingcangkeling",
-            "newcublaksuweng",
-            "newanjuahu",
-            "newbermainlayang",
-            "newcingcangkeling",
-            "newcublaksuweng"
-    };
-
 
     //Question
     public String mQuestionSumatera[] = {
@@ -187,11 +71,11 @@ public class QuestionMap {
             "Berasal darimana kah lagu daerah yang dinyanyikan tersebut ?",
             "Lagu Buah Bolok berasal dari daerah apa ?",
             "Apa nama judul lagu yang diputar ?",
-            "Masjid Kami merupakan lagu asal daerah ic_kalimantan yang letaknya di ?",
+            "Masjid Kami merupakan lagu asal daerah Kalimantan yang letaknya di ?",
             "Berasal darimana kah lagu daerah yang dinyanyikan tersebut ?",
             "Apa nama judul lagu yang diputar ?",
             "Apa nama judul tersebut ?",
-            "Cik cik periuk merupakan lagu daerah ic_kalimantan mana?",
+            "Cik cik periuk merupakan lagu daerah Kalimantan mana?",
             "Berasal darimana kah lagu daerah yang dinyanyikan tersebut ?",
             "Apa nama judul tersebut ?",
     };
@@ -204,7 +88,7 @@ public class QuestionMap {
             "Apa nama judul tersebut ?",
             "Peia Tawa Tawa adalah lagu daerah dari ?",
             "Apa nama judul lagu dan berasal dari mana lagunya ?",
-            "Anging Mamiri berasal dari pulau ic_sulawesi bagian mana ?",
+            "Anging Mamiri berasal dari pulau Sulawesi bagian mana ?",
             "Salah satu lagu daerah dari Sulawesi Utara yang diputar adalah ?",
             "Si Patokaan merupakan contoh lagu daerah provinsi ?",
     };
